@@ -1,0 +1,280 @@
+/*google fonts*/
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,300&family=Playfair+Display:wght@600&family=Raleway:wght@400;700&display=swap');
+
+/*part1*/
+.part1{
+    /* display: flex; */
+    color: beige;
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(/images/background1.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.main1{
+    padding: 300px 0 0 120px;
+    text-transform: uppercase;
+}
+
+.mainTitlePart1{
+    font-family: 'Raleway', sans-serif;
+    font-weight: 900;
+    font-size: 3em;
+}
+
+.subTitlePart1{
+    font-family: 'Playfair Display', serif;
+    font-size: 3em;
+    text-align: center;
+    padding-right: 1em;
+}
+
+.main1button{
+    border-radius: 0;
+    border: 2px solid;
+    text-transform: uppercase;
+    font-family: 'Raleway', sans-serif;
+    font-size: 1em;
+    padding-left: 25px;
+    padding-right: 25px;
+    
+}
+
+.main1button:hover{
+    background-color:#f14e2a;
+    color: white;
+    border-color: #f14e2a;
+    transition: 0.5s;
+}
+
+/*part2*/
+.part2{
+    width: 100%;
+    height: 300vh;
+    background-color: whitesmoke;  
+}
+
+.part21{
+    padding: 70px 0 25px 120px;
+}
+
+.mainTitlePart21{
+    color: rgb(58, 57, 57);
+    text-transform: uppercase;
+    font-family: 'Raleway', sans-serif;
+    font-weight: bold;
+    
+}
+
+.ppart21A{
+    color: rgb(92, 89, 89);
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    
+}
+
+.ppart21B{
+    color: rgb(63, 62, 62);
+    font-family: 'Raleway', sans-serif;
+}
+
+.listPart21{
+    margin: 15px 0 ;
+    padding: 0;
+    list-style: none;
+}
+
+.check{
+    font-size: 20px;
+    padding-right: 4px;
+    color: #f14e2a;
+}
+
+.itemListPart21{
+    color: rgb(92, 89, 89);
+    text-transform: uppercase;
+    font-size: 17px;
+    padding-top: 8px;
+    
+}
+
+.part22{
+    margin-top: 130px;
+    padding-left: 10px;
+}
+
+.part23{
+    margin-left: 5.5em;
+    text-align: center;
+}
+
+.dpart23{
+    color:#f14e2a;
+    font-size: 50px;
+    width: 5.5em;
+    padding: 0;
+}
+
+.spart23{
+    display: block;
+    font-size: 15px;
+    text-align: center;
+    color: rgb(92, 89, 89);
+}
+
+.part24{
+    margin: 20px 0 0 105px;
+
+}
+
+.Bpart24{
+    background-color: transparent ;
+    display: block;
+    border: 0;
+    border-left: 5px white solid;
+    margin-bottom: 15px;
+    
+}
+
+.Bpart24:hover{
+    color:#f14e2a;
+    border-left: 5px rgb(206, 205, 205) solid;
+}
+
+
+
+#dpart24A,#dpart24B,#dpart24C{
+    position: absolute;
+}
+
+#dpart24B,#dpart24C{
+    display: none;
+}
+
+/*part3*/
+.part3{
+    /* display: flex; */
+    color: beige;
+    width: 100%;
+    height: 100vh;
+    background-image: url(/images/background2.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+/*part4*/
+.part4{
+    width: 100%;
+    height: 100vh;
+    background-color: whitesmoke;  
+    
+}
+
+.part42{
+    margin-left: 120px;
+    margin-right: 120px;
+}
+
+/* .rpart42A{
+    margin-left: 20px;
+
+} */
+
+.row1{
+    text-align: center;
+    box-shadow: 0px 0px 10px 5px rgb(187, 187, 187);
+}
+
+.ipart42{
+    color:#f14e2a;
+    font-size: 35px;
+}
+
+.row2{
+    padding-left: 0;
+    margin-top: 50px;
+
+}
+
+.input1_2,.input3{
+    border: 2px rgb(187, 187, 187) solid;
+    width: 250px;
+    height: 40px;
+    margin-left: 10px;
+    padding: 15px;
+}
+
+.input3{
+    width: 514px;
+    margin: 10px 10px ;
+}
+
+/*****************************************************************************************************************/
+/* modified classes/tags  */
+/*body*/
+body{
+    margin: 0;
+    padding: 0;
+}
+
+/*h1>h6*/
+/* h1,h2,h3,h4,h5,h6{
+    font-family: "Raleway", sans-serif;
+} */
+
+/*navbar*/
+.container-fluid{
+    margin: 0.3em 6.5em;
+    text-align: center;
+}
+
+.navbar-brand{
+    margin: 0;
+}
+
+.nav-item.dropdown{
+    padding-left: 18px;
+}
+
+.nav-link.dropdown-toggle{
+    font-size: 0.85em;
+}
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown:hover .nav-link.dropdown-toggle  {
+    color:#f14e2a;
+    
+}
+
+.nav-item.dropdown::after{
+    content:'';
+    position:absolute;
+    width:74%;
+    height:0.13em;
+    left:25px;
+    bottom:6px;
+    background: #f14e2a;
+
+}
+
+.nav-item.dropdown::after{
+    transform: scale(0,1);
+    transform-origin: 0% 100%;
+    transition: transform 0.3s ;
+}
+
+.nav-item.dropdown:hover::after{
+    transform:scale(1,1);
+    height:0.13em;
+    
+}
+
+

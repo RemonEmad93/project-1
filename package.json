@@ -1,0 +1,32 @@
+{
+  "name": "globalwebsite",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "dotenv": "^10.0.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "express-ejs-layouts": "^2.5.0",
+    "express-fileupload": "^1.2.1",
+    "express-flash": "0.0.2",
+    "express-session": "^1.17.1",
+    "google-auth-library": "^7.1.2",
+    "googleapis": "^77.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.1",
+    "msnodesqlv8": "^1.1.6",
+    "mssql": "^6.2.0",
+    "nodemailer": "^6.6.2",
+    "path": "^0.12.7",
+    "web-push": "^3.4.4"
+  }
+}
