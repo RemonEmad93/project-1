@@ -1,6 +1,7 @@
 // required packages
 const express= require('express');
 const expressLayouts = require('express-ejs-layouts');
+const homeRoute= require('./routes/homeRoute');
 
 //constant variables/objects
 const port=process.env.PORT || 3000;
@@ -11,9 +12,7 @@ app.set('view engine', 'ejs');
 app.use(expressLayouts);
 app.set('layout','./layouts/template1');
 
-app.get('/', function(req, res) {
-    res.render('home', {isHomejs:true});
-});
+app.use("/",homeRoute);
 
 app.listen(port, function(){
     console.log("sever is running");
