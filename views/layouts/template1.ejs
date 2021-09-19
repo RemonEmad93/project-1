@@ -8,9 +8,12 @@
     <meta name="keywords" content="GLOBAL PHARMACEUTICAL GROUP, Global Napi, GlobalNAPI, Global, Adanoid, Alerid , Allercet, Allercet Cold, Alloben, Ambezim-G, Antidiazox, Articavol , Articu-Safe, Babyrhino, Bepra , Biaphine, Biogentacin, Bisocard, Bisocard Plus, Bronchotec, Calm Skin , Carnitol , Carvipress, Cobal , Cobal F, Combipres, Controlepsy, Cortiplex Adult, Cortiplex Paediatric, Crestolip, Delarex , Deltarhino, Disartan, Disartan-Co, Ebastel , Emerest , Emo Soft , Ennervita , Exaretic, Finastura , Fluctobar, Gantolief, Gentazone, Glaryl, Globacand, Globexor, Goutifade, Gridamom, Hairoglobe , Hexgabalin, Ibuflex , Immuno Flu, Itracon , Kerella Lotion, Kerella Ointment, Larithrocin, Lemsisart, Lornoxicam, Medexaflam, Mesulid , Metacardia , Metacardia MR, Morlimin, Mucotec, Mupirax , Nail 15, Napibradine, Napifit, Napilac    , Napizole , Napizole Lyoph Vial, Neuroglopentin, Perhepar, Pres, Pridocaine, Procidal, Restolam, Rheumagel , Riba, Riscure, Romantigra, Senidal , Serpass, Shorsalin, Sinopril, Sinopril Co, Soral, Spasmopinaver, Targofloxin, Tensopleron, Terbin Tablets, Tritone, Lornoxicam Vial , Carnitol Ampoules, Terbin Cream, Terbin Solution, Spasmag , Batrafen, Clomid, Dermatop Cream, Cidomycin , Alzepizil, Dermatop Ointment, Hair stabil, Alpha Kadol , Treato-Ulc, Hopforhep, Fortamind Ampoules, Naso-cyanocobalamin, Covaprendo, Clograstat, Clindaval , Metadronic 4 mg/5 ml, Moveasy , Daclahepex, Caviclude Tablets, Pyritrust, Conazoglob Vial, Conazoglob Tablets, Fortamind Oral Solution, Calcifolinon, Treatocandivag, Burnasores, Delarex Syrup, Linezolid Tablets, Linezolid Vial, GNP, GPI, MSD, Sanofi-Aventis, Pierre Fabre, Pharmapack">
     <title>GLOBAL PHARMACEUTICAL GROUP</title>
     <link rel="icon" href="images\favicon.ico">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    <link rel="manifest" href="manifest.json" >
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link href="/vendor/aos/aos.css" rel="stylesheet">
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -142,11 +145,17 @@
     <footer>
 
     </footer>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<%if(locals.isHomejs) %>
-<%{%>
-  <script src="homejs.js"></script>
-<%}%>
+    <script type="text/javascript" src="/vendor/jquery/jquery-3.5.1.js"></script>
+    <script src="/vendor/aos/aos.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/vendor/email-form/validate.js"></script>
+    <script src="/vendor/purecounter/purecounter.js"></script>
+    <%if(locals.isHomejs) %>
+    <%{%>
+      <script src="homejs.js"></script>
+    <%}%>
+    <script src="pwa.js"></script>
     
   </body>
 </html>
