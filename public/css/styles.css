@@ -3,29 +3,28 @@
 
 /*part1*/
 .part1{
-    /* display: flex; */
     color: beige;
-    width: 100%;
-    height: 100vh;
     background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(/images/background1.jpg);
     background-size: cover;
     background-attachment: fixed;
 }
 
 .main1{
-    padding: 300px 0 0 120px;
+    padding: 20% 7% ; 
     text-transform: uppercase;
+    
 }
 
 .mainTitlePart1{
     font-family: 'Raleway', sans-serif;
     font-weight: 900;
-    font-size: 3em;
+    font-size: 280%;
+
 }
 
 .subTitlePart1{
     font-family: 'Playfair Display', serif;
-    font-size: 3em;
+    font-size: 250%;
     text-align: center;
     padding-right: 1em;
 }
@@ -50,13 +49,12 @@
 
 /*part2*/
 .part2{
-    width: 100%;
-    height: 300vh;
+    padding: 7%;
     background-color: whitesmoke;  
 }
 
 .part21{
-    padding: 70px 0 25px 120px;
+    /* padding: 7% ; */
 }
 
 .mainTitlePart21{
@@ -94,37 +92,36 @@
 .itemListPart21{
     color: rgb(92, 89, 89);
     text-transform: uppercase;
-    font-size: 17px;
+    font-size: 90%;
     padding-top: 8px;
     
 }
 
 .part22{
-    margin-top: 130px;
-    padding-left: 10px;
+    margin-top: 3%;
 }
 
-.part23{
-    margin-left: 5.5em;
+.part23.row{
+    margin: 5% ;
     text-align: center;
 }
 
 .dpart23{
     color:#f14e2a;
-    font-size: 50px;
-    width: 5.5em;
+    font-size: 250%;
+    /* width: 25%; */
     padding: 0;
 }
 
 .spart23{
     display: block;
-    font-size: 15px;
+    font-size: 40%;
     text-align: center;
     color: rgb(92, 89, 89);
 }
 
 .part24{
-    margin: 20px 0 0 105px;
+    /* margin: 20px 0 0 105px; */
 
 }
 
@@ -144,9 +141,6 @@
 
 
 
-#dpart24A,#dpart24B,#dpart24C{
-    position: absolute;
-}
 
 #dpart24B,#dpart24C{
     display: none;
@@ -165,15 +159,12 @@
 
 /*part4*/
 .part4{
-    width: 100%;
-    height: 100vh;
     background-color: whitesmoke;  
-    
 }
 
 .part42{
-    margin-left: 120px;
-    margin-right: 120px;
+    margin: 0 7%;
+    text-align: center;
 }
 
 /* .rpart42A{
@@ -199,15 +190,15 @@
 
 .input1_2,.input3{
     border: 2px rgb(187, 187, 187) solid;
-    width: 250px;
+    width: 49.5%;
     height: 40px;
-    margin-left: 10px;
+    /* margin-left: 10px; */
     padding: 15px;
 }
 
 .input3{
-    width: 51px;
-    margin: 10px 10px ;
+    width: 100%;
+    margin: 10px 0 ;
 }
 
 /*****************************************************************************************************************/
@@ -223,19 +214,15 @@ body{
     
 }
 
-/*h1>h6*/
-/* h1,h2,h3,h4,h5,h6{
-    font-family: "Raleway", sans-serif;
-} */
-
 /*navbar*/
+
 .container-fluid{
-    margin: 0.3em 6.5em;
     text-align: center;
 }
 
 .navbar-brand{
     margin: 0;
+    padding-left: 7%;
 }
 
 .nav-item.dropdown{
@@ -282,4 +269,39 @@ body{
     
 }
 
+/*row*/
+.row{
+    padding: 0;
+    margin: 0;
+}
+
+/*media query*/
+@media(max-width:800px){
+
+.main1{
+    padding: 60% 10%;
+    text-align: center;
+}
+
+.mainTitlePart1{
+    font-size: 180%;
+}
+
+.subTitlePart1{
+    font-size: 180%;
+    padding-left: 6%;
+    
+}
+
+.input1_2{
+    width: 100%;
+    margin-top: 5%;
+}
+
+}
+
+.text-center{
+    width: 25%;
+    margin: 7% auto;
+}
 

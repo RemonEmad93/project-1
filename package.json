@@ -26,6 +26,7 @@
     "msnodesqlv8": "^1.1.6",
     "mssql": "^6.2.0",
     "nodemailer": "^6.6.2",
+    "passport-google-oauth20": "^2.0.0",
     "path": "^0.12.7",
     "web-push": "^3.4.4"
   }
