@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="534837972708-qaeu83v1q094bdgspbpvp4vcs1n1luhi.apps.googleusercontent.com">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="signin_part1">
+    <h1>hello</h1>
+    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+    <script>
+    function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        console.log('ID: ' + profile.getId()); 
+        console.log('Name: ' + profile.getName());
+        console.log('Image URL: ' + profile.getImageUrl());
+        console.log('Email: ' + profile.getEmail()); 
+    }
+    </script>
+
+<a href="#" onclick="signOut();">Sign out</a>
+<script>
+  function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+  }
+</script>
+    </div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const passport= require('passport');
+// const GoogleStrategy = require('passport-google-oauth20').Strategy;
+
+// passport.serializeUser(function(user, done){
+//     done(null,user.id)
+//   })
+//   passport.deserializeUser(function(user, done){
+//     done(null,user.id)
+//   })
+  
+//   passport.use(new GoogleStrategy({
+//     clientID: process.env.clientID,
+//     clientSecret: process.env.clientSecret,
+//     callbackURL: "http://localhost:5051/",
+//     userProfileURL:"https://www.googleapis.com/oauth2/v3/userinfo"
+//     },
+//     function(accessToken, refreshToken, profile, cb) {
+//       // User.findOrCreate({ googleId: profile.id }, function (err, user) {
+//       //   return cb(err, user);
+//       //   console.log('no errors');
+//       //   console.log(err);
+//       //   console.log(user);
+//       // });
+//       console.log('no problem')
+//       console.log(profile)
+//       cb(null,profile)
+//     }
+//   ));

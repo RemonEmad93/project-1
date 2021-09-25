@@ -1,5 +1,9 @@
 const register_get= (req,res)=>{
-    res.render('register', {isHomejs:true});
+    res.render('register', );
+}
+
+const google_get=(req, res)=>{
+    
 }
 
 module.exports={
