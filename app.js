@@ -5,14 +5,15 @@ const homeRoute= require('./routes/homeRoute');
 const registerRoute= require('./routes/registerRoute')
 const loginRoute= require('./routes/loginRoute')
 const env= require('dotenv').config();
-const sql= require('mssql/msnodesqlv8');
-const sqlcon= require('./config/sqlConnection');
+
+
 const google = require('googleapis').google;
 const jwt = require('jsonwebtoken');
 const OAuth2 = google.auth.OAuth2;
 const cookieParser = require('cookie-parser');
 const CONFIG = require('./config');
 const https = require('https');
+const bodyParser= require('body-parser');
 
 
 // const {OAuth2Client} = require('google-auth-library');
@@ -32,6 +33,7 @@ const https = require('https');
 const port=process.env.PORT || 4000;
 const app = express();
 
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 app.use(expressLayouts);
@@ -88,50 +90,50 @@ app.use(express.json());
 //   .catch(console.error);
 
 //   console.log(token);  
-//   res.render("login")
+// res.render("login")
     
 // })
 
-app.post('/home',function(req,res){
-    res.render("home")
-})
+// app.post('/home',function(req,res){
+//     res.render("home")
+// })
 
 // app.get('/',function(req, res){
 //   res.render('signin')
 // })
 
 
-app.get('/', function (req, res) {
-  // Create an OAuth2 client object from the credentials in our config file
-  const oauth2Client = new OAuth2(CONFIG.oauth2Credentials.client_id, CONFIG.oauth2Credentials.client_secret, CONFIG.oauth2Credentials.redirect_uris[0]);
+// app.get('/', function (req, res) {
+//   // Create an OAuth2 client object from the credentials in our config file
+//   const oauth2Client = new OAuth2(CONFIG.oauth2Credentials.client_id, CONFIG.oauth2Credentials.client_secret, CONFIG.oauth2Credentials.redirect_uris[0]);
 
-  // Obtain the google login link to which we'll send our users to give us access
-  const loginLink = oauth2Client.generateAuthUrl({
-    access_type: 'offline', // Indicates that we need to be able to access data continously without the user constantly giving us consent
-    scope: CONFIG.oauth2Credentials.scopes // Using the access scopes from our config file
-  });
-  return res.render("index", { loginLink: loginLink });
-});
+//   // Obtain the google login link to which we'll send our users to give us access
+//   const loginLink = oauth2Client.generateAuthUrl({
+//     access_type: 'offline', // Indicates that we need to be able to access data continously without the user constantly giving us consent
+//     scope: CONFIG.oauth2Credentials.scopes // Using the access scopes from our config file
+//   });
+//   return res.render("index", { loginLink: loginLink });
+// });
 
 
-app.get('/auth_callback', function (req, res) {
-  // Create an OAuth2 client object from the credentials in our config file
-  const oauth2Client = new OAuth2(CONFIG.oauth2Credentials.client_id, CONFIG.oauth2Credentials.client_secret, CONFIG.oauth2Credentials.redirect_uris[0]);
+// app.get('/auth_callback', function (req, res) {
+//   // Create an OAuth2 client object from the credentials in our config file
+//   const oauth2Client = new OAuth2(CONFIG.oauth2Credentials.client_id, CONFIG.oauth2Credentials.client_secret, CONFIG.oauth2Credentials.redirect_uris[0]);
 
-  if (req.query.error) {
-      // The user did not give us permission.
-      return res.redirect('/');
-  } else {
-      oauth2Client.getToken(req.query.code, function(err, token) {
-      if (err)
-          return res.redirect('/');
+//   if (req.query.error) {
+//       // The user did not give us permission.
+//       return res.redirect('/');
+//   } else {
+//       oauth2Client.getToken(req.query.code, function(err, token) {
+//       if (err)
+//           return res.redirect('/');
       
-      // Store the credentials given by google into a jsonwebtoken in a cookie called 'jwt'
-      res.cookie('jwt', jwt.sign(token, CONFIG.JWTsecret));
-      return res.redirect('/get_some_data');
-      });
-  }
-});
+//       // Store the credentials given by google into a jsonwebtoken in a cookie called 'jwt'
+//       res.cookie('jwt', jwt.sign(token, CONFIG.JWTsecret));
+//       return res.redirect('/get_some_data');
+//       });
+//   }
+// });
 
 // app.get('/get_some_data', function (req, res) {
 //   if (!req.cookies.jwt) {
@@ -157,33 +159,33 @@ app.get('/auth_callback', function (req, res) {
 //   });
 // });
 
-app.get('/get_some_data',function (req,res) {
-  if (!req.cookies.jwt) {
-    // We haven't logged in
-    return res.redirect('/');
-  }
-  // Create an OAuth2 client object from the credentials in our config file
-  const oauth2Client = new OAuth2(CONFIG.oauth2Credentials.client_id, CONFIG.oauth2Credentials.client_secret, CONFIG.oauth2Credentials.redirect_uris[0]);
-  // Add this specific user's credentials to our OAuth2 client
-  oauth2Client.credentials = jwt.verify(req.cookies.jwt, CONFIG.JWTsecret);
+// app.get('/get_some_data',function (req,res) {
+//   if (!req.cookies.jwt) {
+//     // We haven't logged in
+//     return res.redirect('/');
+//   }
+//   // Create an OAuth2 client object from the credentials in our config file
+//   const oauth2Client = new OAuth2(CONFIG.oauth2Credentials.client_id, CONFIG.oauth2Credentials.client_secret, CONFIG.oauth2Credentials.redirect_uris[0]);
+//   // Add this specific user's credentials to our OAuth2 client
+//   oauth2Client.credentials = jwt.verify(req.cookies.jwt, CONFIG.JWTsecret);
 
-  var oauth2 = google.oauth2({
-    auth: oauth2Client,
-    version: 'v2'
-  });
-  oauth2.userinfo.get(function(err, response) {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(response);
-      return res.render('data', { subscriptions: response });
-    }
-  });
+//   var oauth2 = google.oauth2({
+//     auth: oauth2Client,
+//     version: 'v2'
+//   });
+//   oauth2.userinfo.get(function(err, response) {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       console.log(response);
+//       return res.render('data', { subscriptions: response });
+//     }
+//   });
   
-})
+// })
 
 
-// app.use("/",registerRoute);
+app.use("/",registerRoute);
 
 app.listen(port, function(){
     console.log("sever is running on "+ port);

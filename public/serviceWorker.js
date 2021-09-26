@@ -1,4 +1,4 @@
-const staticCacheName = 'v6';
+const staticCacheName = 'v7';
 
 const assets = [
     '/manifest.json',

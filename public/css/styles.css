@@ -275,6 +275,34 @@ body{
     margin: 0;
 }
 
+/*register& login*/
+.text-center{
+    width: 25%;
+    margin: 3% 0 0 6%;
+    border-radius: 5%;
+    
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))
+}
+
+
+.signin_part1{
+    display: block;
+}
+
+.registerBG{
+    padding-top: 5%;
+    height: 100vh;
+    background-image: url(/images/about.png);
+    background-size: cover;
+    
+}
+
+.form-signin{
+    margin: 0 auto ;
+    
+    width: 75%;
+}
+
 /*media query*/
 @media(max-width:800px){
 
@@ -298,16 +326,12 @@ body{
     margin-top: 5%;
 }
 
-}
-
 .text-center{
-    width: 25%;
-    margin: 7% auto;
+    width: 80%;
+    margin: 25% auto 0 auto;
 }
 
 
-.signin_part1{
-    display: block;
-    margin-top: 10%;
+
 }
 
