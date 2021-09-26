@@ -9,6 +9,7 @@ const bcrypt = require('bcrypt');
 
 const saltRounds = 10;
 
+//google auth
 const register_get= (req,res)=>{
     // Create an OAuth2 client object from the credentials in our config file
     const oauth2Client = new OAuth2(CONFIG.oauth2Credentials.client_id, CONFIG.oauth2Credentials.client_secret, CONFIG.oauth2Credentials.redirect_uris[0]);
@@ -21,6 +22,7 @@ const register_get= (req,res)=>{
     return res.render("register", { loginLink: loginLink });
 }
 
+//google auth
 const google_get=(req, res)=>{
     // Create an OAuth2 client object from the credentials in our config file
   const oauth2Client = new OAuth2(CONFIG.oauth2Credentials.client_id, CONFIG.oauth2Credentials.client_secret, CONFIG.oauth2Credentials.redirect_uris[0]);
@@ -40,10 +42,12 @@ const google_get=(req, res)=>{
   }
 }
 
+
 const login_get=(req, res)=>{
     res.render('login')
 }
 
+//create new account
 const login_post=(req, res)=>{
     var request= new sql.Request();
    
@@ -80,6 +84,7 @@ const login_post=(req, res)=>{
 
 }
 
+//register with google
 const home_get=(req,res)=>{
 
     if (!req.cookies.jwt) {
@@ -128,14 +133,11 @@ const home_get=(req,res)=>{
                 })
               }
           })
-
-          
-
-          
         }
       });
 }
 
+//login
 const home_post=(req, res)=>{
     var request= new sql.Request();
     console.log(req.body.password)
