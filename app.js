@@ -17,16 +17,6 @@ const session = require('express-session');
 const port=process.env.PORT || 4000;
 const app = express();
 
-app.use(session({
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: true,
-    cookie: { 
-        secure: true ,
-        maxAge: 1000*15,  //session duration(15s)
-        sameSite: true, //accept cookies from the same domain
-    }
-  }))
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('public'));
@@ -35,6 +25,18 @@ app.use(expressLayouts);
 app.set('layout','./layouts/template1');
 app.use(cookieParser());
 app.use(express.json());
+
+app.use(session({
+    key:"project1",
+    secret: 'keyboard cat',
+    resave: true,
+    saveUninitialized: true,
+    cookie: { 
+        
+        maxAge: 1000*60*60  //session duration(1h)
+         //accept cookies from the same domain
+    }
+}))
 
 app.use("/",registerRoute);
 
