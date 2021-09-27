@@ -12,9 +12,21 @@ const cookieParser = require('cookie-parser');
 const CONFIG = require('./config');
 const https = require('https');
 const bodyParser= require('body-parser');
+const session = require('express-session');
 
 const port=process.env.PORT || 4000;
 const app = express();
+
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { 
+        secure: true ,
+        maxAge: 1000*15,  //session duration(15s)
+        sameSite: true, //accept cookies from the same domain
+    }
+  }))
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('public'));

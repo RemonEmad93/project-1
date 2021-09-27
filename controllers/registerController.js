@@ -8,6 +8,21 @@ const alert = require('alert');
 const bcrypt = require('bcrypt');
 
 const saltRounds = 10;
+var googleres=" ";
+
+
+const home_page=(req, res)=>{
+  var session = req.session
+  console.log(session.userid)
+  if(session.userid){
+    res.render('home',{username:session.userid})
+
+  }
+  else{
+    res.render('home',{username:' '})
+
+  }
+}
 
 //google auth
 const register_get= (req,res)=>{
@@ -19,7 +34,7 @@ const register_get= (req,res)=>{
       access_type: 'offline', // Indicates that we need to be able to access data continously without the user constantly giving us consent
       scope: CONFIG.oauth2Credentials.scopes // Using the access scopes from our config file
     });
-    return res.render("register", { loginLink: loginLink });
+    return res.render("register", { loginLink: loginLink, username:" "});
 }
 
 //google auth
@@ -44,13 +59,13 @@ const google_get=(req, res)=>{
 
 
 const login_get=(req, res)=>{
-    res.render('login')
+    res.render('login' ,{username:" "})
 }
 
 //create new account
 const login_post=(req, res)=>{
     var request= new sql.Request();
-   
+    var session = req.session;
 
     request.input("email",sql.NVarChar,req.body.email)
     request.input("password",sql.NVarChar,bcrypt.hashSync(req.body.password, saltRounds, function(err, hash) {
@@ -66,7 +81,7 @@ const login_post=(req, res)=>{
           console.log("error")
 
           alert('already registered');
-          return res.render('login')
+          return res.render('login',{username:" "})
           
         }
         else{
@@ -76,7 +91,10 @@ const login_post=(req, res)=>{
                   console.log(err.message)
               }
               else{
-                return res.render('home');
+                session.userid=req.body.username
+                const username= req.body.username
+                console.log(req.session)
+                return res.redirect('/');
               }
           })
         }
@@ -86,6 +104,7 @@ const login_post=(req, res)=>{
 
 //register with google
 const home_get=(req,res)=>{
+  var session = req.session;
 
     if (!req.cookies.jwt) {
         // We haven't logged in
@@ -118,7 +137,7 @@ const home_get=(req,res)=>{
                 console.log("error")
 
                 alert('done');
-                return res.render('login')
+                return res.render('login',{username:" "})
                 
               }
               else{
@@ -128,7 +147,11 @@ const home_get=(req,res)=>{
                         console.log(err.message)
                     }
                     else{
-                      return res.render('home', { subscriptions: response });
+                      session.userid=response.data.name
+                      console.log(req.session)
+                      const username= response.data.name
+                      googleres=response
+                      return res.redirect('/' );
                     }
                 })
               }
@@ -139,13 +162,14 @@ const home_get=(req,res)=>{
 
 //login
 const home_post=(req, res)=>{
+  var session=req.session
     var request= new sql.Request();
     console.log(req.body.password)
     request.input("email",sql.NVarChar,req.body.email)
     request.input("password",sql.NVarChar,req.body.password)
     
 
-    request.query('select Email, Password from accounts where Email=@email ',(err,result)=>{
+    request.query('select Email, Password, UserName from accounts where Email=@email ',(err,result)=>{
         console.log('done')
         if(result.recordset.length!=0)
         {
@@ -157,7 +181,12 @@ const home_post=(req, res)=>{
 
                 if(isValid){
                     console.log('done3')
-                    return res.render('home')
+                    const username=result.recordset[0].UserName
+                    console.log(username)
+                    session.userid= result.recordset[0].UserName
+                    console.log("the session name is: ",session.userid)
+                    console.log(req.session)
+                    return res.redirect('/')
                 }
                 else{
                     alert('password is wrong')
@@ -176,11 +205,32 @@ const home_post=(req, res)=>{
     
 }
 
+const logout=(req,res)=>{
+  req.session.destroy();
+  res.redirect('/');
+}
+
+const page1= (req, res)=>{
+  var session= req.session
+  if(session.userid)
+  {
+    console.log(session.userid)
+    res.render('page1',{username:" "})
+  }
+  else{
+    res.send('error: need to register')
+  }
+  
+}
+
 module.exports={
     register_get,
     google_get,
     login_get,
     login_post,
     home_get,
-    home_post
+    home_post,
+    logout,
+    home_page,
+    page1
 }
