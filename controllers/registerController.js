@@ -9,17 +9,18 @@ const bcrypt = require('bcrypt');
 
 const saltRounds = 10;
 var googleres=" ";
+let sui="";
 
 
 const home_page=(req, res)=>{
-  var session = req.session
+ var session= req.session
   console.log(session.userid)
   if(session.userid){
-    res.render('home',{username:session.userid})
+    res.render('home',{username:session.userid,signup:'', login:"",logout:"logout"})
 
   }
   else{
-    res.render('home',{username:' '})
+    res.render('home',{username:'',signup:'sign up', login:"login",logout:""})
 
   }
 }
@@ -34,7 +35,7 @@ const register_get= (req,res)=>{
       access_type: 'offline', // Indicates that we need to be able to access data continously without the user constantly giving us consent
       scope: CONFIG.oauth2Credentials.scopes // Using the access scopes from our config file
     });
-    return res.render("register", { loginLink: loginLink, username:" "});
+    return res.render("register", { loginLink: loginLink, username:" ",signup:'', login:"login",logout:""});
 }
 
 //google auth
@@ -59,7 +60,7 @@ const google_get=(req, res)=>{
 
 
 const login_get=(req, res)=>{
-    res.render('login' ,{username:" "})
+    res.render('login' ,{username:" ",signup:'sign up', login:"",logout:""})
 }
 
 //create new account
@@ -81,7 +82,7 @@ const login_post=(req, res)=>{
           console.log("error")
 
           alert('already registered');
-          return res.render('login',{username:" "})
+          return res.render('login',{username:" ",signup:'sign up', login:"",logout:""})
           
         }
         else{
@@ -136,8 +137,9 @@ const home_get=(req,res)=>{
               {
                 console.log("error")
 
-                alert('done');
-                return res.render('login',{username:" "})
+                alert('already registered');
+                session.userid=response.data.name
+                return res.redirect('/')
                 
               }
               else{
@@ -162,7 +164,7 @@ const home_get=(req,res)=>{
 
 //login
 const home_post=(req, res)=>{
-  var session=req.session
+  var session= req.session
     var request= new sql.Request();
     console.log(req.body.password)
     request.input("email",sql.NVarChar,req.body.email)
@@ -181,11 +183,13 @@ const home_post=(req, res)=>{
 
                 if(isValid){
                     console.log('done3')
-                    const username=result.recordset[0].UserName
+                    var username=result.recordset[0].UserName
                     console.log(username)
                     session.userid= result.recordset[0].UserName
                     console.log("the session name is: ",session.userid)
-                    console.log(req.session)
+                    sui=session.userid
+                    session.auth=true
+                    //console.log(req.session)
                     return res.redirect('/')
                 }
                 else{
@@ -207,6 +211,7 @@ const home_post=(req, res)=>{
 
 const logout=(req,res)=>{
   req.session.destroy();
+  res.clearCookie("project1");
   res.redirect('/');
 }
 
@@ -215,7 +220,7 @@ const page1= (req, res)=>{
   if(session.userid)
   {
     console.log(session.userid)
-    res.render('page1',{username:" "})
+    res.render('page1',{username:session.userid ,signup:'', login:"",logout:"logout"})
   }
   else{
     res.send('error: need to register')
