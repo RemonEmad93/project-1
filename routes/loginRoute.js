@@ -2,6 +2,7 @@ const express= require('express');
 const router= express.Router();
 const Controller=require('../controllers/loginController');
 
-router.get("/",Controller.login_get);
-
-module.exports= router;
+router.get('/loginGet',Controller.login_get)
+router.post('/loginPost',Controller.login_post)
+ 
+module.exports= router; 
