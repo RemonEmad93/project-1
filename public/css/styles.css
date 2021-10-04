@@ -299,8 +299,27 @@ body{
 
 .form-signin{
     margin: 0 auto ;
-    
     width: 75%;
+}
+
+/*add&display&edit pages*/
+.productPageFormat{
+    color: floralwhite;
+    width:90%;
+    margin: 2% auto;
+    padding-bottom: 2%;
+    
+   
+}
+
+.productDetails{
+    margin: 0 auto ;
+    width:90%;
+   
+}
+
+.registerBG .text-center  .form-label{
+    font-size: 150%;
 }
 
 /*media query*/

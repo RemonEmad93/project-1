@@ -1,0 +1,41 @@
+<div class="registerBG">
+    <div class="text-center productPageFormat">
+
+        <div class="container-fluid"></div>
+        <%if(message.length>0){%>
+            <div class="alert alert-success" style="width: 25%; margin-top:2%; ">
+              <%=message%>
+            </div>
+          <%}%>
+        <h1>product</h1>
+        <form action="/inputsPost" class="productDetails" method='post'enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="productName" class="form-label">product name</label>
+                <input type="text" class="form-control" id="productName"  name="productName"placeholder="product name" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="productDescription" class="form-label">product description</label>
+                <textarea class="form-control" id="productDescription"  rows="3" name='productDescription' placeholder="product description" required></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="picture" class="form-label">upload picture</label>
+                <input type="file" id="picture" name="productPicture" required>
+            </div>
+
+            <div class="mb-3">
+                <input type="checkbox" id="active" name="active" value="checked" checked>
+                <label for="active" class="form-label">Active</label>
+                
+            </div>
+
+            <button class="btn btn-success"type="submit"  >submit</button>
+        </form>
+
+        <a class="btn btn-success"type="button"  href="/">home page</a>
+        <a class="btn btn-success"type="button"  href="/displayAdminProduct">admin products</a>
+        <a class="btn btn-success"type="button"  href="/displayUserProduct">user products</a>
+        </div>
+    </div>
+</div>

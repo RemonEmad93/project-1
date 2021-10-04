@@ -6,6 +6,9 @@ const env= require('dotenv').config();
 const cookieParser = require('cookie-parser');
 const bodyParser= require('body-parser');
 const session = require('express-session');
+const upload= require('express-fileupload');
+//const flash = require('express-flash')
+const flash = require('connect-flash');
 
 const port=process.env.PORT || 4000;
 const app = express();
@@ -26,6 +29,10 @@ app.use(session({
         maxAge: 1000*60*60  //session duration(1h)
     }
 }))
+app.use(upload())
+app.use(flash())
+
+
 
 app.use('/',homeRoute);
 

@@ -4,11 +4,11 @@ const home_page=(req, res)=>{
 
     //when login
     if(session.userid){
-      res.render('home',{username:session.userid,signup:'', login:"",logout:"logout"})
+      res.render('home',{message:req.flash('message'),username:session.userid,signup:'', login:"",logout:"logout"})
     }
     //without login
     else{
-      res.render('home',{username:'',signup:'sign up', login:"login",logout:""})
+      res.render('home',{message:req.flash('message'),username:'',signup:'sign up', login:"login",logout:""})
     }
 }
 

@@ -1,11 +1,19 @@
-
 <div class="part1">
    <div class="main1">
       <h1 class="mainTitlePart1">global pharmaceutical group </h1>
       <h1 class="subTitlePart1">care to cure</h1>
-      <a type="button" class="btn btn-outline-light btn-lg main1button" href="/inputs">get started</a>
-      <button type="button" class="btn btn-outline-light btn-lg main1button"> <i class="bi bi-play-circle"></i> watch video</button>
+      <a type="button" class="btn btn-outline-light btn-lg main1button" href="/inputsGet">add product</a>
+      <a type="button" class="btn btn-outline-light btn-lg main1button" href="/displayAdminProduct"> admin products </a>
+      <a type="button" class="btn btn-outline-light btn-lg main1button" href="/displayUserProduct"> user products </a>
+      
+      <%if(message.length>0){%>
+         <div class="alert alert-success" style="width: 18%; margin-top:2%; ">
+           <%=message%>
+         </div>
+       <%}%>
    </div>
+   
+   
 </div>
 
 <div class="part2">

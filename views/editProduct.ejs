@@ -1,0 +1,36 @@
+<div class="registerBG">
+    <div class="text-center productPageFormat">
+        <div class="container-fluid"></div>
+        <h1>edit product</h1>
+        <form action="/editProductPost" class="productDetails" method='post'enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="productName" class="form-label">product name</label>
+                <input type="text" class="form-control" id="productName"  name="productName"placeholder="product name" value="<%= products[0].ProductName%>"> 
+            </div>
+
+            <div class="mb-3">
+                <label for="productDescription" class="form-label">product description</label>
+                <textarea class="form-control" id="productDescription"  rows="3" name='productDescription' placeholder="product description"><%= products[0].ProductDescription%> </textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="picture" class="form-label">change picture</label>
+                <br>
+                <img src="\productsImages\<%= products[0].ProductPicture %>" width="80" height="80" alt="">
+                <input type="file" id="picture" name="productPicture" value="\productsImages\<%= products[0].ProductPicture %>">
+            </div>
+
+            <div class="mb-3">
+                <input type="checkbox" id="active" name="active" value="checked" checked>
+                <label for="active" class="form-label">Active</label>
+                
+            </div>
+
+            <button class="btn btn-success"type="submit"  >save changes</button>
+        </form>
+
+        <a class="btn btn-success"type="button"  href="/">home page</a>
+        <a class="btn btn-success"type="button"  href="/displayProduct">view products</a>
+        </div>
+    </div>
+</div>

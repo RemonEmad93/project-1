@@ -1,11 +1,11 @@
-const staticCacheName = 'v7';
+const staticCacheName = 'v11';
 
 const assets = [
     '/manifest.json',
     '/css/styles.css',
     '/vendor/bootstrap/css/bootstrap.min.css',
     '/vendor/bootstrap/js/bootstrap.min.js',
-    '/pwa.js',
+    '/js/pwa.js',
     'offline.html'
 
 ]

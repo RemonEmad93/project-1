@@ -1,7 +1,14 @@
 var sql= require('mssql/msnodesqlv8');
 
 var config={
-    connectionString: 'Driver={SQL Server Native Client 10.0};Server={.};Database={GNP};Trusted_Connection={yes}',
+    /* server: process.env.SERVER,
+    port: process.env.SQLPort,
+    database: process.env.DATABASE, 
+    driver:"msnodesqlv8", */
+    
+    connectionString: 'Driver={SQL Server Native Client 11.0};Server={.};Database={GNP};Trusted_Connection={yes}',
+
+    
 };
 
 var connection= sql.connect(config,(error)=>{

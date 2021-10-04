@@ -1,6 +1,13 @@
+
 <div class="registerBG">
 <div class="text-center">
-    
+  <%if(message.length>0){%>
+    <div class="alert alert-success">
+      <%=message%>
+    </div>
+
+  <%}%>
+
     <main class="form-signin">
       <form action="/loginPost" method=POST>
         <img  src="images/96.png" alt="" width="auto" height="auto">

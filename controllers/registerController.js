@@ -4,7 +4,7 @@ const OAuth2 = google.auth.OAuth2;
 const CONFIG = require('../config');
 const sql = require("mssql/msnodesqlv8");
 const sqlcon= require('../config/sqlConnection');
-const alert = require('alert');  //popup message
+
 const bcrypt = require('bcrypt'); // used for encryption of passwords
 
 const saltRounds = 10;  //used in encryption of passwords
@@ -76,7 +76,7 @@ const check_email=(req,res)=>{
         request.query('select Email from accounts where Email=@email',(err,result)=>{
             if(result.recordset.length!=0)
             {
-              alert('already registered');
+              req.flash('message', 'already registered');
               session.userid=response.data.name
               return res.redirect('/')
             }
@@ -88,6 +88,7 @@ const check_email=(req,res)=>{
                   }
                   else{
                     session.userid=response.data.name
+                    req.flash('message', 'registered successfully');
                     return res.redirect('/' );
                   }
               })
@@ -112,8 +113,9 @@ const register_without_google=(req, res)=>{
     request.query('select Email from accounts where Email=@email',(err,result)=>{
         if(result.recordset.length!=0)
         {
-          alert('already registered');
-          return res.render('login',{username:" ",signup:'sign up', login:"",logout:""})
+          
+          req.flash('message', 'already registered');
+          return res.render('login',{message:req.flash('message'),username:" ",signup:'sign up', login:"",logout:""})
         }
         else{
           request.query("insert into accounts(Email, Password, UserName) values(@email, @password, @username )",(err)=>{
@@ -123,6 +125,7 @@ const register_without_google=(req, res)=>{
               }
               else{
                 session.userid=req.body.username
+                req.flash('message', 'registered successfully');
                 return res.redirect('/');
               }
           })

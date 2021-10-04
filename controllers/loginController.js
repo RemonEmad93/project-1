@@ -1,13 +1,12 @@
 const sql = require("mssql/msnodesqlv8");
 const sqlcon= require('../config/sqlConnection');
-const alert = require('alert'); //pop message
 const bcrypt = require('bcrypt'); // used for encryption of passwords
 
 const saltRounds = 10;  //used in encryption of passwords
 
 //render login page
 const login_get=(req, res)=>{
-    res.render('login' ,{username:" ",signup:'sign up', login:"",logout:""})
+    res.render('login' ,{message:'',username:" ",signup:'sign up', login:"",logout:""})
 }
 
 //post the data entered by the user
@@ -25,15 +24,20 @@ const login_post=(req, res)=>{
             bcrypt.compare(req.body.password, result.recordset[0].Password, function (err, isValid) {
                 if(isValid){
                     session.userid= result.recordset[0].UserName
+                    req.flash('message','login successfully')
                     return res.redirect('/')
                 }
                 else{
-                    alert('password is wrong')
+
+                    req.flash('message','password is wrong')
+                    res.render('login' ,{message:req.flash('message'),username:" ",signup:'sign up', login:"",logout:""})
+                
                 }
             }
         )}
         else{
-          alert('email or password is wrong')
+            req.flash('message','email or password is wrong')
+            res.render('login' ,{message:req.flash('message'),username:" ",signup:'sign up', login:"",logout:""})
         }
     })
 }
