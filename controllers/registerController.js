@@ -73,11 +73,12 @@ const check_email=(req,res)=>{
         request.input("photo",sql.NVarChar,response.data.picture)
 
         //check if aleardy registered with google
-        request.query('select Email from accounts where Email=@email',(err,result)=>{
+        request.query('select AccountID, Email, UserName from accounts where Email=@email',(err,result)=>{
             if(result.recordset.length!=0)
             {
               req.flash('message', 'already registered');
-              session.userid=response.data.name
+              session.userid=result.recordset[0].AccountID
+              session.username= result.recordset[0].UserName
               return res.redirect('/')
             }
             else{
@@ -87,9 +88,17 @@ const check_email=(req,res)=>{
                       console.log(err.message)
                   }
                   else{
-                    session.userid=response.data.name
-                    req.flash('message', 'registered successfully');
-                    return res.redirect('/' );
+                    request.query('select AccountID, UserName from accounts where Email=@email',(err,result)=>{
+                      if(err)
+                      {
+                        console.log(err)
+                      }else{
+                        session.userid=result.recordset[0].AccountID
+                        session.username= result.recordset[0].UserName
+                        req.flash('message', 'registered successfully');
+                        return res.redirect('/' );
+                      }
+                    })
                   }
               })
             }
@@ -124,9 +133,17 @@ const register_without_google=(req, res)=>{
                 console.log(err.message)
               }
               else{
-                session.userid=req.body.username
-                req.flash('message', 'registered successfully');
-                return res.redirect('/');
+                request.query('select Email, AccountID, UserName from accounts where Email=@email',(err,result)=>{
+                  if(err)
+                  {
+                    console.log(err)
+                  }else{
+                    session.userid=result.recordset[0].AccountID
+                    session.username= result.recordset[0].UserName
+                    req.flash('message', 'registered successfully');
+                    return res.redirect('/');
+                  }
+                })
               }
           })
         }

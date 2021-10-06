@@ -17,13 +17,14 @@ const login_post=(req, res)=>{
     request.input("email",sql.NVarChar,req.body.email)
     request.input("password",sql.NVarChar,req.body.password)
     
-    request.query('select Email, Password, UserName from accounts where Email=@email ',(err,result)=>{
+    request.query('select AccountID, Email, Password, UserName from accounts where Email=@email ',(err,result)=>{
         //check email
         if(result.recordset.length!=0){
             //check password when email found
             bcrypt.compare(req.body.password, result.recordset[0].Password, function (err, isValid) {
                 if(isValid){
-                    session.userid= result.recordset[0].UserName
+                    session.userid= result.recordset[0].AccountID
+                    session.username= result.recordset[0].UserName
                     req.flash('message','login successfully')
                     return res.redirect('/')
                 }

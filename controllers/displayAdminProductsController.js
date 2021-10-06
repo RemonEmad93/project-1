@@ -8,63 +8,37 @@ const display_product=(req,res)=>{
     console.log('display products')
     var session= req.session
     
-    const functionID=3
-
     if(session.userid)
     {
-        request.input('username', sql.NVarChar, session.userid)
-        request.input('functionID', sql.Int, functionID)
+        request.input('accountid', sql.NVarChar, session.userid)
+        request.input('roleid',sql.NVarChar,"1")
 
-        request.query('select AccountID from Accounts where UserName=@username', (err, result)=>{
+        request.query('select UserRoleID from UserRoles where AccountID=@accountid and RoleID=@roleid', (err, result)=>{
             if(err)
             {
+                console.log('get admin display products err 1')
                 console.log(err)
             }else{
-                console.log(result)
-                const accountID=result.recordset[0].AccountID
-                console.log(accountID)
-                request.input('accountID', sql.Int, accountID)
-
-                request.query('select * from permissions where AccountID=@accountID and FunctionID=@functionID', (err, result)=>{
-                    if(err){
-                        console.log(err)
-                    }else{
-                        console.log(result.recordset[0]) 
-                        if(result.recordset[0])
+                if(result.recordset.length>0)
+                {
+                    //get all rows from DB
+                    request.query("select * from products  ",(err,result)=>{
+                        if(err)
                         {
-                            console.log("the id is:",result.recordset[0].AccountID)
-                            //get all rows from DB
-                        request.query("select * from products  ",(err,result)=>{
-                            if(err)
-                            {
-                                console.log(err)
-                            }
-                            else{
-                               
-                                
-                                var products
-                                products=result.recordset
-                                return res.render('displayAdminProducts',{products:products, username:session.userid ,signup:'', login:"",logout:"logout"})
-                            }
-                        })
-
+                            console.log(err)
                         }else{
-                            console.log("no id")
-                            req.flash('message','need to register')
-                            res.redirect('/')
+                            var products
+                            products=result.recordset
+                            return res.render('displayAdminProducts',{products:products, username:session.username ,signup:'', login:"",logout:"logout"})
                         }
-                        
-                    }
-                })
-            }
-        })
-
-        
-
-
-        
-    }
-    else{
+                    })  
+                }else{
+                    req.flash('message','need to register as admin')
+                    res.redirect('/')
+                }
+            } 
+        })    
+    }else{
         req.flash('message','need to register')
         res.redirect('/')
     }

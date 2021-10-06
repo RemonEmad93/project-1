@@ -4,7 +4,7 @@ const home_page=(req, res)=>{
 
     //when login
     if(session.userid){
-      res.render('home',{message:req.flash('message'),username:session.userid,signup:'', login:"",logout:"logout"})
+      res.render('home',{message:req.flash('message'),username:session.username,signup:'', login:"",logout:"logout"})
     }
     //without login
     else{

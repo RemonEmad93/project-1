@@ -8,49 +8,27 @@ const display_product=(req,res)=>{
     console.log('display products')
     var session= req.session
 
-    const functionID=4
-
     if(session.userid)
     {
-        request.input('username', sql.NVarChar, session.userid)
-        request.input('functionID', sql.Int, functionID)
+        request.input('accountid', sql.NVarChar, session.userid)
+        request.input('roleid2',sql.NVarChar,"2")
+        request.input('roleid1',sql.NVarChar,"1")
 
-        request.query('select AccountID from Accounts where UserName=@username', (err, result)=>{
+        //get all rows with active=1
+        request.query("select * from products where Active=1 ",(err,result)=>{      
             if(err)
-            {
+            {   
                 console.log(err)
             }else{
-                const accountID=result.recordset[0].AccountID
-                console.log(accountID)
-                request.input('accountID', sql.Int, accountID)
-
-                request.query('select AccountID from permissions where AccountID=@accountID and FunctionID=@functionID', (err)=>{
-                    if(err){
-                        console.log(err)
-                    }else{
-                        //get all rows with active=1
-        request.query("select * from products where Active=1 ",(err,result)=>{
-            if(err)
-            {
-                console.log(err)
-            }
-            else{
                 var products
                 products=result.recordset
-                return res.render('displayAdminProducts',{products:products, username:session.userid ,signup:'', login:"",logout:"logout"})
+                return res.render('displayUserProducts',{products:products, username:session.username ,signup:'', login:"",logout:"logout"})
             }
         })
-                    }
-                })
-            }
-        })
-
-        
-
-
-        
-    }
-    else{
+                
+              
+                    
+    }else{
         req.flash('message','need to register')
         res.redirect('/')
     }

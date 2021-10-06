@@ -1,31 +1,34 @@
-<br><br><br> <br>
-<a class="btn btn-success" type="button" href="/">home page</a>
-<div class="row">
-  <div class="col-lg-12 col-md-12 col-sm-12 ">
-    <% if (products.length>0) { %>
-      <% products.forEach(product=>{ %>
-        <div class="card">
-          <div class="card-body">
 
-            <h6>Product Name:</h6>
-            <div>
-              <%= product.ProductName%>
+<div class="productInfo">
+  
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 ">
+      <a class="btn btn-success" type="button" href="/">home page</a>
+      <% if (products.length>0) { %>
+        <% products.forEach(product=>{ %>
+          <div class="productStyle card ">
+            <div class="card-body">
+
+              <h6>Product Name:</h6>
+              <div>
+                <%= product.ProductName%>
+              </div>
+              <h6>Product Description:</h6>
+              <div>
+                <%= product.ProductDescription%>
+              </div>
+              <h6>Product Picture:</h6>
+              <img src="\productsImages\<%= product.ProductPicture %>" alt="product picture">
+              
             </div>
-            <h6>Product Description:</h6>
-            <div>
-              <%= product.ProductDescription%>
-            </div>
-            <h6>Product Picture:</h6>
-            <img src="\productsImages\<%= product.ProductPicture %>" alt="product picture">
-            
           </div>
-        </div>
-        <% }) %>
-          <% }else{ %>
-            <h3>
-              no products to display
-            </h3>
-          <%}%>
+          <% }) %>
+            <% }else{ %>
+              <h3>
+                no products to display
+              </h3>
+            <%}%>
 
+    </div>
   </div>
 </div>

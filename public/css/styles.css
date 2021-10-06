@@ -302,6 +302,13 @@ body{
     width: 75%;
 }
 
+/* .googleDesign{
+    background-color: white;
+    width:35%;
+    height: auto;
+
+} */
+
 /*add&display&edit pages*/
 .productPageFormat{
     color: floralwhite;
@@ -320,6 +327,21 @@ body{
 
 .registerBG .text-center  .form-label{
     font-size: 150%;
+}
+
+.productInfo{
+    padding: 5%;
+    background-image: url(/images/about.png);
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.productStyle{
+    color:azure;
+    width: 75%;
+    margin: 3% auto;
+    border-radius: 5%;
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))
 }
 
 /*media query*/

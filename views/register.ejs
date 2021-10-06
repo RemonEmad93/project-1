@@ -10,22 +10,21 @@
           <input type="text" name="username" class="form-control" id="floatingInput" placeholder="username" required>
           <label for="floatingInput">username</label>
         </div>
+        
         <div class="form-floating">
           <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
           <label for="floatingInput">Email address</label>
         </div>
+
         <div class="form-floating">
           <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password" required>
           <label for="floatingPassword">Password</label>
         </div>
-    
-        <div class="checkbox mb-3">
-          <label>
-            <input type="checkbox" value="remember-me"> Remember me
-          </label>
-        </div>
 
-          <a href="<%= loginLink %>">sign in</a>
+          
+        <div class="form-floating">
+          <a href="<%= loginLink %>" class="googleDesign btn btn-lg btn-primary">sign in with google</a>
+        </div>
         <button class="w-100 btn btn-lg btn-primary" type="submit" >Sign in</button>
         <p class="mb-3 text-muted">have account?<a href="/loginGet" class="btn btn-link">login</a></p>
       </form>
