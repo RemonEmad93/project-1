@@ -8,11 +8,13 @@ const display_product=(req,res)=>{
     console.log('display products')
     var session= req.session
     
+
     if(session.userid)
     {
         request.input('accountid', sql.NVarChar, session.userid)
         request.input('roleid',sql.NVarChar,"1")
 
+        //check if user is admin
         request.query('select UserRoleID from UserRoles where AccountID=@accountid and RoleID=@roleid', (err, result)=>{
             if(err)
             {

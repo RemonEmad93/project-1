@@ -2,8 +2,6 @@ const sql = require("mssql/msnodesqlv8");
 const sqlcon= require('../config/sqlConnection');
 const bcrypt = require('bcrypt'); // used for encryption of passwords
 
-const saltRounds = 10;  //used in encryption of passwords
-
 //render login page
 const login_get=(req, res)=>{
     res.render('login' ,{message:'',username:" ",signup:'sign up', login:"",logout:""})
@@ -29,10 +27,8 @@ const login_post=(req, res)=>{
                     return res.redirect('/')
                 }
                 else{
-
                     req.flash('message','password is wrong')
                     res.render('login' ,{message:req.flash('message'),username:" ",signup:'sign up', login:"",logout:""})
-                
                 }
             }
         )}

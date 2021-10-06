@@ -32,8 +32,6 @@ app.use(session({
 app.use(upload())
 app.use(flash())
 
-
-
 app.use('/',homeRoute);
 
 app.listen(port, function(){

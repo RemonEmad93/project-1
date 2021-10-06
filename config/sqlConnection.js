@@ -7,8 +7,6 @@ var config={
     driver:"msnodesqlv8", */
     
     connectionString: 'Driver={SQL Server Native Client 11.0};Server={.};Database={GNP};Trusted_Connection={yes}',
-
-    
 };
 
 var connection= sql.connect(config,(error)=>{

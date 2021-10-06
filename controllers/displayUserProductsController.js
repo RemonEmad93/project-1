@@ -25,9 +25,6 @@ const display_product=(req,res)=>{
                 return res.render('displayUserProducts',{products:products, username:session.username ,signup:'', login:"",logout:"logout"})
             }
         })
-                
-              
-                    
     }else{
         req.flash('message','need to register')
         res.redirect('/')

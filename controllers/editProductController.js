@@ -1,4 +1,3 @@
-const flash = require("express-flash");
 const sql = require("mssql/msnodesqlv8");
 const sqlcon= require('../config/sqlConnection');
 
@@ -14,6 +13,7 @@ const edit_product_get=(req, res)=>{
     request.input('accountid', sql.NVarChar, session.userid)
     request.input('roleid',sql.NVarChar,"1")
 
+    //check if user is admin 
     request.query('select UserRoleID from UserRoles where AccountID=@accountid and RoleID=@roleid', (err, result)=>{
       if(err)
       {
@@ -23,6 +23,8 @@ const edit_product_get=(req, res)=>{
         {
           ProductIndex= req.params.productid;
           request.input('productIndex', sql.Int, ProductIndex)
+
+          //get product details from DB using product index
           request.query("select ProductName, ProductDescription, ProductPicture from Products where ProductID=@productIndex",(err, result)=>{
             if(err)
             {
@@ -45,6 +47,7 @@ const edit_product_get=(req, res)=>{
   }
 }
 
+//change in product detials and save it in DB
 const edit_product_post=(req, res)=>{
   var request= new sql.Request();
   var session= req.session
@@ -61,7 +64,6 @@ const edit_product_post=(req, res)=>{
       }else{
         if(result.recordset.length>0)
         {
-          console.log("the id is:",result.recordset[0].AccountID)
           request.input('productIndex', sql.Int, ProductIndex)
           request.input('productname', sql.NVarChar, req.body.productName)
           request.input('productdescription',sql.NVarChar,req.body.productDescription)

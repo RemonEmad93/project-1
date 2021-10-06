@@ -82,12 +82,14 @@ const check_email=(req,res)=>{
               return res.redirect('/')
             }
             else{
+              // insert user data in DB if not registered
               request.query("insert into accounts(UserName, ImagePath, Email) values(@username, @photo , @email)",(err)=>{
                   if(err)
                   {
                       console.log(err.message)
                   }
                   else{
+                    //get username and id from DB
                     request.query('select AccountID, UserName from accounts where Email=@email',(err,result)=>{
                       if(err)
                       {
@@ -110,44 +112,43 @@ const check_email=(req,res)=>{
 //normal register without google account then render home page
 const register_without_google=(req, res)=>{
   var request= new sql.Request();
-    var session = req.session;
+  var session = req.session;
 
-    request.input("email",sql.NVarChar,req.body.email)
-    request.input("password",sql.NVarChar,bcrypt.hashSync(req.body.password, saltRounds, function(err, hash) {
-        return hash
-    }))
-    request.input("username",sql.NVarChar,req.body.username)
-    
-    //check if aleardy registered
-    request.query('select Email from accounts where Email=@email',(err,result)=>{
-        if(result.recordset.length!=0)
-        {
-          
-          req.flash('message', 'already registered');
-          return res.render('login',{message:req.flash('message'),username:" ",signup:'sign up', login:"",logout:""})
-        }
-        else{
-          request.query("insert into accounts(Email, Password, UserName) values(@email, @password, @username )",(err)=>{
-              if(err)
-              {
-                console.log(err.message)
-              }
-              else{
-                request.query('select Email, AccountID, UserName from accounts where Email=@email',(err,result)=>{
-                  if(err)
-                  {
-                    console.log(err)
-                  }else{
-                    session.userid=result.recordset[0].AccountID
-                    session.username= result.recordset[0].UserName
-                    req.flash('message', 'registered successfully');
-                    return res.redirect('/');
-                  }
-                })
-              }
-          })
-        }
-    })
+  request.input("email",sql.NVarChar,req.body.email)
+  request.input("password",sql.NVarChar,bcrypt.hashSync(req.body.password, saltRounds, function(err, hash) {
+      return hash
+  }))
+  request.input("username",sql.NVarChar,req.body.username)
+  
+  //check if aleardy registered
+  request.query('select Email from accounts where Email=@email',(err,result)=>{
+      if(result.recordset.length!=0)
+      {
+        req.flash('message', 'already registered');
+        return res.render('login',{message:req.flash('message'),username:" ",signup:'sign up', login:"",logout:""})
+      }
+      else{
+        request.query("insert into accounts(Email, Password, UserName) values(@email, @password, @username )",(err)=>{
+            if(err)
+            {
+              console.log(err.message)
+            }
+            else{
+              request.query('select Email, AccountID, UserName from accounts where Email=@email',(err,result)=>{
+                if(err)
+                {
+                  console.log(err)
+                }else{
+                  session.userid=result.recordset[0].AccountID
+                  session.username= result.recordset[0].UserName
+                  req.flash('message', 'registered successfully');
+                  return res.redirect('/');
+                }
+              })
+            }
+        })
+      }
+  })
 }
 
 
